@@ -1,0 +1,48 @@
+@font-face {
+    font-family: "SourceSansPro-Black";
+    src: url(../fonts/SourceSansPro-Black.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-BlackItalic";
+    src: url(../fonts/SourceSansPro-BlackItalic.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-Bold";
+    src: url(../fonts/SourceSansPro-Bold.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-BoldItalic";
+    src: url(../fonts/SourceSansPro-BoldItalic.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-ExtraLight";
+    src: url(../fonts/SourceSansPro-ExtraLight.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-ExtraLightItalic";
+    src: url(../fonts/SourceSansPro-ExtraLightItalic.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-Italic";
+    src: url(../fonts/SourceSansPro-Italic.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-Light";
+    src: url(../fonts/SourceSansPro-Light.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-LightItalic";
+    src: url(../fonts/SourceSansPro-LightItalic.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-Regular";
+    src: url(../fonts/SourceSansPro-Regular.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-Semibold";
+    src: url(../fonts/SourceSansPro-Semibold.otf) format("opentype");
+}
+@font-face {
+    font-family: "SourceSansPro-SemiboldItalic";
+    src: url(../fonts/SourceSansPro-SemiboldItalic.otf) format("opentype");
+}

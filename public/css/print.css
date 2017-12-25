@@ -1,0 +1,76 @@
+body{
+  padding:0px !important;
+}
+
+nav{
+  display: none !important;
+}
+
+nav ul{
+  display: none !important;
+}
+
+#form{
+  display: none !important;
+}
+
+#header{
+  display: none !important;
+}
+
+section h3{
+}
+
+section{
+  margin-top:0px !important;
+}
+
+#section{
+  width: 100% !important;
+  margin-top:0px;
+}
+
+.sectionContainer{
+  padding: 0px !important;
+  margin-left: 0px !important;
+  /* width: 100%; */
+  display: block !important;
+}
+
+nav ul li a{
+  display: none !important;
+}
+
+table{
+    text-align: center;
+  }
+
+table td, table th{
+  border: 1px solid #000 !important;
+}
+
+table th{
+  background-color: black !important;
+  color:red !important;
+}
+
+input{
+  display: none !important;
+}
+
+h3{
+  display: none !important;
+}
+
+#print{
+  display: block !important;
+}
+
+#pr{
+  display: none;
+}
+
+#btnImpresora{
+  display: none !important;
+  visibility: hidden !important;
+}

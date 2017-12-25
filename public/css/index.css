@@ -1,0 +1,122 @@
+body{
+  background-color: #eee;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 97vh;
+}
+
+.login{
+  width: 30%;
+  background-color: white;
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 10px;
+  -webkit-box-shadow: 0px 2px 31px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 2px 31px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 2px 31px 0px rgba(0,0,0,0.75);
+  transition: .5s ease all;
+}
+
+#pnlLogin{
+    transition: .5s ease all;
+}
+
+#pnlRegister{
+    transition: .5s ease all;
+    display:none;
+}
+
+.login .loginTitle{
+  display: block;
+  text-align: center;
+  color: #666;
+  margin-top:30px;
+  margin-bottom: 40px;
+  font-family: "SourceSansPro-Light";
+  font-size: 28px;
+}
+
+.login input[type="email"],input[type="password"],input[type="submit"],input[type="tel"],input[type="text"]{
+  display: block;
+  margin:10px auto;
+  width: 80%;
+}
+
+.login input[type="email"],input[type="password"],input[type="tel"],input[type="text"]{
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 2px solid #ddd;
+  color:#666;
+  font-family: "SourceSansPro-Light";
+  font-size: 16px;
+}
+
+.login input[type="submit"]{
+  height: 45px;
+  background-color: #0AC986;
+  border: 0px;
+  color:white;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  font-family: "SourceSansPro-Bold";
+  font-size: 18px;
+  color:rgb(255,255,255);
+}
+
+.login input[type="submit"]:hover{
+  cursor:pointer;
+  background-color: #06a76e;
+}
+
+.login input[type="email"]:focus,input[type="password"]:focus,input[type="tel"]:focus,input[type="text"]:focus{
+  border: 2px solid #06a76e;
+}
+
+.login .register{
+  display: block;
+  text-align: center;
+  color:#0AC986;
+  font-family: "SourceSansPro-Light";
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.login .register:hover{
+  text-decoration: underline;
+}
+
+
+/* COMIENZO MEDIA QUERY */
+
+@media (max-width: 767px) {
+    .login{
+      width: 80%;
+    }
+}
+
+
+@media (min-width:768px) and (max-width: 991px) {
+    .login{
+      width: 70%;
+    }
+}
+
+
+#RequiredFieldValidator2,#RequiredFieldValidator1,#RequiredFieldValidator3,#RequiredFieldValidator4,#RequiredFieldValidator5{
+    float:right;
+}
+
+#foot{
+    text-align:center;
+}
+
+#foot span{
+    font-family:"SourceSansPro-Bold";
+    color:red;
+    font-size: 1.17em;
+}
