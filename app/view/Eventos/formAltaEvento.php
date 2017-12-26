@@ -92,7 +92,8 @@
                     <input type="text" name="txtDireccion" id="txtDireccion">
 
                     <label for="txtObservaciones">Observaciones</label>
-                    <input type="text" name="txtObservaciones" id="txtObservaciones">
+                    <!-- <input type="text" name="txtObservaciones" id="txtObservaciones"> -->
+                    <textarea name="txtObservaciones" id="txtObservaciones" rows="3"></textarea>
 
                     <label for="txtCosto">Costo</label>
                     <input type="number" name="txtCosto" id="txtCosto">

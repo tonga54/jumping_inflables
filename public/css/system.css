@@ -137,7 +137,7 @@ article{
     width:40%;
 }
 
-#form input[type="text"], select,input[type="date"],input[type="number"],input[type="password"],input[type="email"],input[type="tel"],input[type="datetime-local"]{
+#form input[type="text"], select,input[type="date"],input[type="number"],input[type="password"],input[type="email"],input[type="tel"],input[type="datetime-local"],textarea{
     display:block;
     width:100%;
     padding: 4px;
@@ -147,6 +147,10 @@ article{
     color: #666;
     font-family: "SourceSansPro-Light";
     font-size: 14px;
+}
+
+#form textarea{
+  resize: none;
 }
 
 #form input[type="select"], .choices,.choices__item .choices__item--selectable{

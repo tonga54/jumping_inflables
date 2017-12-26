@@ -53,7 +53,7 @@ date_default_timezone_set('America/Montevideo');
                         $date = $data1;
                         echo "<input type='date' name='txtFecha' id='txtFecha' min='$min' value='$date'>";
                       }else{
-                        $date = date("Y"). "-" . date("m") . "-" . date("d");
+                        $date = date("Y-m-d");
                         echo "<input type='date' name='txtFecha' id='txtFecha' min='$min' value='$date'>";
                       }
 

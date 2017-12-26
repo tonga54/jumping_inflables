@@ -11,16 +11,16 @@ class BackupModelo{
   }
 
   public function crearBackup(){
-    $dmp = "C:\\xampp\mysql\bin\mysqldump";
-    $dbhost = "localhost";
-    $dbuser = "gaston";
-    $dbpass = "kalu1234";
-    $dbname = "jumpinginflables";
-    $fecha = date("Ymd-His");
+    $path = "C:\\xampp\mysql\bin\mysqldump";
+    require_once("././core/datosConexion.php");
+    date_default_timezone_set('America/Montevideo');
+    $fecha = date("d-m-Y_H-m-s");
 
-    $salida_sql = $dbname.'_'.$fecha.'.sql';
-    $dump = "$dmp -h$dbhost -u$dbuser -p$dbpass --opt $dbname > ../backups/$salida_sql";
+    $salida_sql = $datos['database'].'_'.$fecha.'.sql';
+
+    $dump = $path ." -h".$datos['host'] . " -u" . $datos['user'] . " -p" . $datos['password'] . " --opt " . $datos['database'] . " > ../backups/" . $salida_sql;
     system($dump,$output);
+
     if($output){
       $salida_sql = "Hubo un error";
     }else{

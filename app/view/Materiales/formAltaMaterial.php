@@ -1,6 +1,5 @@
 <?php
 include('././core/tempTop.php');
-date_default_timezone_set('America/Montevideo');
  ?>
 
    <script type="text/javascript">

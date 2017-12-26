@@ -15,11 +15,6 @@ class Evento extends Controller{
     new Views("Eventos/formAltaEvento",$materiales);*/
   }
 
-  public function getEventos(){
-    $ev = $this->modelEvento->mostrarEventos();
-    $viewEventos = new Views("Eventos/listarEventos",$ev);
-  }
-
   public function mostrarUltimos10Eventos(){
     return $this->modelEvento->mostrarUltimos10Eventos();;
   }
