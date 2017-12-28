@@ -127,6 +127,33 @@ class EventoModelo{
     return $result;
   }
 
+  public function getById($id){
+    $sql = "select e.*, group_concat(m.nombre) as materiales
+              from evento e
+              left join (
+                  select em.idEvento, m.nombre
+                    from eventomaterial em
+                    join material m
+                      on m.id = em.idMaterial) m
+                on m.idEvento = e.id WHERE e.id = '$id'
+             group by e.id ORDER BY (horaInicio)";
+    $result = $this->db->query($sql);
+    return $result;
+  }
+
+
+  public function editarEvento($id,$cliente,$telefono,$fecha,$horaInicio,$horaFin,$cantChicos,$direccion,$observaciones,$costo,$duracion){
+    $sql = "UPDATE Evento SET cliente = '".$cliente."',telefono = '".$telefono."',fecha = '".$fecha."',horaInicio = '".$horaInicio."',horaFin = '".$horaFin."',cantChicos = '".$cantChicos."',direccion = '".$direccion."',observaciones = '".$direccion."',costo = '".$costo."',duracion = '".$duracion."'
+    WHERE id = ".$id."";
+    
+    $this->db->query($sql);
+    if($this->db->affected_rows > 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 }
 
  ?>

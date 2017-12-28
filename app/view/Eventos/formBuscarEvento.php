@@ -10,6 +10,19 @@ date_default_timezone_set('America/Montevideo');
        cursor: pointer;
        padding-top: 20px;
      }
+     td a{
+       color:black;
+       text-decoration: none;
+     }
+
+     td a:hover{
+       color:red;
+
+     }
+
+     td a span{
+       font-size: 20px;
+     }
    </style>
    <script type="text/javascript">
        function imprimir() {
@@ -37,12 +50,12 @@ date_default_timezone_set('America/Montevideo');
 
     <div id="section">
         <header>
-            <h3>Buscar eventos</h3>
+            <h3 class="hidden-print">Buscar eventos</h3>
             <h3 id="print"></h3>
         </header>
         <article>
             <form class="" action="index.php?controller=Evento&action=buscarEventosXFecha" method="post">
-              <div id="form">
+              <div id="form" class="hidden-print">
                   <label for="txtFecha">Fecha</label>
                   <?php
 
@@ -51,10 +64,10 @@ date_default_timezone_set('America/Montevideo');
                       $min = date("Y"). "-" . $mesMenos1 . "-" . date("d");
                       if($data1 != null){
                         $date = $data1;
-                        echo "<input type='date' name='txtFecha' id='txtFecha' min='$min' value='$date'>";
+                        echo "<input class='hidden-print' type='date' name='txtFecha' id='txtFecha' min='$min' value='$date'>";
                       }else{
                         $date = date("Y-m-d");
-                        echo "<input type='date' name='txtFecha' id='txtFecha' min='$min' value='$date'>";
+                        echo "<input class='hidden-print' type='date' name='txtFecha' id='txtFecha' min='$min' value='$date'>";
                       }
 
                   ?>
@@ -110,12 +123,16 @@ date_default_timezone_set('America/Montevideo');
                           $mat .= "</td>";
 
                           echo $mat;
+                          echo "<td class='hidden-print'><a href='index.php?controller=Evento&action=editarEvento&idEvento=". $fila['id'] . "'><span class='icon-pencil'></span></a></td>";
+                          echo "<td class='hidden-print'><a href='index.php?controller=Evento&action=eliminarEvento&idEvento=". $fila['id']. "'><span class='icon-bin'></span></td>";
+
                           echo "</tr>";
                         }
+
                         echo "</tbody>
                       </table>";
                       echo "</div>";
-                      echo "<div id='pr'>";
+                      echo "<div class='hidden-print'>";
                       echo "<span class='icon-printer' id='btnImpresora' onclick='imprimir();'></span>";
                       echo "</div>";
                       echo "<div style='clear:both;'></div>";

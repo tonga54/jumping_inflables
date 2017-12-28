@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="../public/css/print.css" media="print">
     <link rel="stylesheet" href="../public/css/fonts.css">
     <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/css/system.css">
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=es5,fetch,Element.prototype.classList,requestAnimationFrame,Node.insertBefore,Node.firstChild,Object.assign"></script>
     <link rel="stylesheet" href="../public/css/choices.min.css?version=3.0.2">
     <script src="../public/js/choices.min.js?version=2.8.8"></script>

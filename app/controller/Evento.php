@@ -65,6 +65,33 @@ class Evento extends Controller{
     }
   }
 
+  public function editarEvento(){
+    $id = $_GET['idEvento'];
+    $result = $this->modelEvento->getById($id);
+    new Views("Eventos/editarEvento",$result);
+  }
+
+  public function editarEventoProceso(){
+    $id = $_POST['txtId'];
+    $cliente = $_POST['txtCliente'];
+    $telefono = $_POST['txtTelefono'];
+    $fecha = $_POST['txtFecha'];
+    $horaInicio = $_POST['txtHoraInicio'];
+    $horaFin = $_POST['txtHoraFin'];
+    $cantChicos = $_POST['txtCantChicos'];
+    $direccion = $_POST['txtDireccion'];
+    $observaciones = $_POST['txtObservaciones'];
+    $costo = $_POST['txtCosto'];
+    $duracion = $_POST['txtDuracion'];
+
+    $result = $this->modelEvento->editarEvento($id,$cliente,$telefono,$fecha,$horaInicio,$horaFin,$cantChicos,$direccion,$observaciones,$costo,$duracion);
+    if($result){
+      new Views("Eventos/Respuesta","Evento editado con exito");
+    }else{
+      new Views("Eventos/Respuesta","Algo fallo");
+    }
+  }
+
 
 }
 

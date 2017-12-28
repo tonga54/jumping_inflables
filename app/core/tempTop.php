@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="../public/css/print.css" media="print">
     <link rel="stylesheet" href="../public/css/fonts.css">
     <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/css/system.css">
 
     <style media="screen">
 

@@ -10,15 +10,8 @@ nav ul{
   display: none !important;
 }
 
-#form{
-  display: none !important;
-}
-
 #header{
   display: none !important;
-}
-
-section h3{
 }
 
 section{
@@ -54,23 +47,15 @@ table th{
   color:red !important;
 }
 
-input{
-  display: none !important;
-}
-
-h3{
-  display: none !important;
-}
-
 #print{
   display: block !important;
-}
-
-#pr{
-  display: none;
 }
 
 #btnImpresora{
   display: none !important;
   visibility: hidden !important;
+}
+
+.hidden-print{
+  display: none;
 }

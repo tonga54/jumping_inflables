@@ -1,104 +1,406 @@
-@font-face {
-  font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?u11t');
-  src:  url('../fonts/icomoon.eot?u11t#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?u11t') format('truetype'),
-    url('../fonts/icomoon.woff?u11t') format('woff'),
-    url('../fonts/icomoon.svg?u11t#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
+#slcMateriales {
+  height: 30vh;
 }
 
-[class^="icon-"], [class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+#print{
+  display: none;
 }
 
-.icon-home:before {
-  content: "\e900";
+
+/* Para cambiar el ancho del nav, y que se ajuste todo correcto, debes cambiar
+la cantidad que necesites en dicho nav, y luego en el sectionContainer ajustar
+el margin left, dependiendo de el ajuste realizado en el nav */
+body{
+  background-color: #eee;
+  padding-top: 34px;
+  margin: 0px;
 }
-.icon-folder-plus:before {
-  content: "\e931";
+
+#header{
+  /*background-color: rgb(255,255,255);*/
+  background-color: #3c8dbc;
+  box-shadow: 0 0.0625em 0.3125em rgba(0,0,0,.15);
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 50px;
+  z-index: 1;
 }
-.icon-address-book:before {
-  content: "\e944";
+
+#header h3{
+  margin: 0px;
+  padding: 10px;
 }
-.icon-printer:before {
-  content: "\e954";
+
+.logo{
+  float:right;
+  height: 100%;
+  align-items: center;
+  display: flex;
 }
-.icon-binoculars:before {
-  content: "\e985";
+
+.logo{
+  color: rgba(255,255,255,.8);
+  font-family: "SourceSansPro-Regular";
 }
-.icon-search:before {
-  content: "\e986";
+
+.logo .icon-checkmark{
+  /* margin-left: 40px; */
+  margin-right: 5px;
 }
-.icon-bin:before {
-  content: "\e9ac";
+
+.logo a{
+  margin-right: 40px;
+  font-family: "SourceSansPro-Regular";
+  color: rgba(255,255,255,.8);
+  text-decoration:none;
+  transition: 0.3s ease all;
 }
-.icon-clipboard:before {
-  content: "\e9b8";
+
+.logo .icon-exit{
+    font-size:1em;
 }
-.icon-list:before {
-  content: "\e9ba";
+
+.logo a:hover{
+    font-family:"SourceSansPro-Semibold";
+    color: rgba(255,255,255,1);
+    font-size:1.05em;
 }
-.icon-list2:before {
-  content: "\e9bb";
+
+nav{
+  width: 15%;
+  display: inline-block;
+  background-color: #262B33;
+  position: fixed;
+  height: 100%;
+  padding-top: 30px;
+  left: 0;
 }
-.icon-menu:before {
-  content: "\e9bd";
+
+nav ul{
+  padding: 0px 15px 0px 15px;
+  list-style: none;
 }
-.icon-eye-plus:before {
-  content: "\e9cf";
+
+nav ul li{
+  margin-top: 25px;
+  color: rgba(255,255,255,0.5);
 }
-.icon-plus:before {
-  content: "\ea0a";
+
+nav ul li a{
+  text-decoration: none;
+  color: rgba(255,255,255,0.5);
+  font-family: "SourceSansPro-Black";
+  transition: ease all .3s;
+  font-size: 13px;
 }
-.icon-minus:before {
-  content: "\ea0b";
+
+nav ul li:hover,a:hover{
+    color: rgba(255,255,255,0.8);
 }
-.icon-cancel-circle:before {
-  content: "\ea0d";
+
+section{
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  margin-top: 26px;
+  background-color: #eee;
 }
-.icon-cross:before {
-  content: "\ea0f";
+
+.sectionContainer{
+  padding: 20px;
+  margin-left: 17%;
 }
-.icon-checkmark:before {
-  content: "\ea10";
+
+.sectionContainer #section{
+  background-color: white;
+  width: 97%;
+  box-shadow: 0 0 3px rgba(0,0,0,0.1);
+  padding: 20px;
+  box-sizing: border-box;
 }
-.icon-checkmark2:before {
-  content: "\ea11";
+
+section header{
+  font-family: "SourceSansPro-Bold";
+  text-align: center;
 }
-.icon-enter:before {
-  content: "\ea13";
+
+article{
+    /*display:flex;*/
+    overflow-x: auto;
 }
-.icon-exit:before {
-  content: "\ea14";
+
+#form{
+    margin: 0 auto;
+    width:40%;
 }
-.icon-circle-up:before {
-  content: "\ea41";
+
+#form input[type="text"], select,input[type="date"],input[type="number"],input[type="password"],input[type="email"],input[type="tel"],input[type="datetime-local"],textarea{
+    display:block;
+    width:100%;
+    padding: 4px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    color: #666;
+    font-family: "SourceSansPro-Light";
+    font-size: 14px;
 }
-.icon-circle-right:before {
-  content: "\ea42";
+
+#form textarea{
+  resize: none;
 }
-.icon-circle-down:before {
-  content: "\ea43";
+
+#form input[type="select"], .choices,.choices__item .choices__item--selectable{
+  font-family: "SourceSansPro-Light";
+  font-size: 14px;
 }
-.icon-circle-left:before {
-  content: "\ea44";
+
+.choices__list--multiple .choices__item {
+  background-color:#3c8dbc !important;
 }
-.icon-checkbox-checked:before {
-  content: "\ea52";
+
+#form select {
+    padding: 2px;
+    font-family: "SourceSansPro-Light";
 }
-.icon-filter:before {
-  content: "\ea5b";
+
+#form span,label{
+    margin-top:15px;
+    display:block;
+    font-family:"SourceSansPro-Regular";
+    margin-bottom: 19px;
+}
+
+#form #radioButtonsLine{
+    margin: 15px auto 0 auto;
+    text-align:center;
+}
+
+#form #radioButtonsLine span{
+    display:inline;
+}
+
+/*
+OLD VERSION OF THE SUBMIT BUTTON
+
+form input[type="submit"]{
+  height: 45px;
+  background-color:#08bf7e;
+  border: 0px;
+  width:100%;
+  border-radius:3px;
+  color:white;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  font-family: "SourceSansPro-Bold";
+  font-size: 18px;
+  color:rgb(255,255,255);
+}*/
+
+#form input[type="submit"] {
+    height: 35px;
+    background-color: #08bf7e;
+    border: 0px;
+    width: 30%;
+    border-radius: 3px;
+    color: white;
+    margin-left:71%;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-family: "SourceSansPro-Bold";
+    font-size: 14px;
+    color: rgb(255,255,255);
+    /*float: right;*/
+}
+
+#form input[type="submit"]:hover{
+  cursor:pointer;
+  background-color: #00af71;
+}
+
+#form img{
+    width:50%;
+    margin: 20px auto 0px auto;
+    display:block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+#form #articleContent_btnPostBack{
+    display:none;
+}
+
+
+.overlay {
+    position: absolute;
+    top: 3%;
+    bottom: 0;
+    left: 25%;
+    right: 0;
+    height: 94%;
+    width: 50%;
+    opacity: 0;
+    transition: .8s ease;
+    background-color: #3c8dbc;
+}
+
+
+#form #articleContent_pnlImg:hover .overlay {
+  opacity: 0.7;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  font-family:"SourceSansPro-ExtraLight";
+}
+
+
+.text{
+   text-align: center;
+}
+
+#form #articleContent_pnlImg{
+    position: relative;
+}
+
+table {
+    font-family: "SourceSansPro-Regular";
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table td{
+    font-size:14px;
+}
+
+table td img{
+    width: 50% !important;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    margin:0px auto !important;
+    box-sizing:border-box;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: rgba(60,141,188,0.4);}
+
+table th {
+    /*padding:12px 10%;*/
+    background-color: #3c8dbc;
+    color: white;
+    text-align:center;
+    margin-right:50px;
+}
+
+.montoTotal {
+    font-family:"SourceSansPro-Semibold";
+
+}
+
+@media (max-width: 600px) {
+    .info {
+        display: none;
+    }
+
+    #form{
+      width: 80%;
+    }
+
+    #form input[type="submit"]{
+      width: 40%;
+    }
+
+    .stats header{
+      display: block;
+    }
+
+    .stats header h3{
+      display: block;
+    }
+
+    .stats .art{
+      display: block;
+      margin:0px !important;
+      width: 100%;
+    }
+}
+
+@media (min-width:601px){
+  .slim-table{
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+
+#form span {
+    display: inline-block;
+    margin-bottom:15px;
+}
+
+
+
+
+/*
+    articleContent_ValidationSummary1
+*/
+#articleContent_ValidationSummary1{
+    background-color: #dc3545;
+    color: white;
+    padding: 0.1%;
+    box-sizing: border-box;
+    font-family: "SourceSansPro-Light";
+}
+
+#articleContent_ValidationSummary1 ul {
+    list-style:decimal;
+}
+
+#articleContent_ValidationSummary2{
+    background-color: #dc3545;
+    color: white;
+    padding: 0.1%;
+    box-sizing: border-box;
+    font-family: "SourceSansPro-Light";
+}
+
+#articleContent_ValidationSummary2 ul {
+    list-style:decimal;
+}
+
+#section footer{
+    text-align:center;
+}
+
+#section footer img{
+    width:30%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    margin:5px 0px;
+}
+
+#footerContent_lblEstado{
+    font-family:"SourceSansPro-Bold";
+    color:red;
+    font-size: 1.17em;
 }
