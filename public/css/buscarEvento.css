@@ -1,0 +1,103 @@
+#btnImpresora{
+  float: right;
+  font-size: 2em;
+  cursor: pointer;
+  padding-top: 20px;
+}
+
+.tbl{
+  margin-top: 1% !important;
+}
+
+td a{
+  color: #666;
+  text-decoration: none;
+}
+
+td a:hover{
+  color:black;
+}
+
+td a span{
+  font-size: 20px;
+}
+
+#btnImpresora{
+  color: #666;
+}
+
+#btnImpresora:hover{
+  color:black;
+}
+
+#sugerirMateriales{
+  /* display: inline-block; */
+  width: 49%;
+}
+
+#sugerirMateriales label{
+  margin-bottom: 7px;
+  display: inline-block;
+}
+
+
+#sugerirMateriales input[type="button"] {
+  height: 35px;
+   background-color: #08bf7e;
+   border: 0px;
+   width: 30%;
+   border-radius: 3px;
+   color: white;
+   margin-left: 47%;
+   margin-top: 25px;
+   margin-bottom: 30px;
+   font-family: "SourceSansPro-Bold";
+   font-size: 14px;
+   color: rgb(255,255,255);
+   /* float: right; */
+}
+
+#sugerirMateriales input[type="button"]:hover{
+  cursor:pointer;
+  background-color: #00af71;
+}
+
+form{
+  display: inline-block;
+  width: 50%;
+}
+
+
+h4{
+  font-family: "SourceSansPro-Bold";
+}
+
+.txt{
+ display: block;
+}
+
+@media (max-width: 600px) {
+  #sugerirMateriales{
+    display: inline-block;
+    width: 100% !important;
+  }
+
+  #sugerirMateriales input[type="button"] {
+     width: 30%;
+  }
+
+  form{
+    display: inline-block;
+    width: 100%;
+  }
+
+ .txt input{
+   margin-left: 10px;
+   width: 90%;
+ }
+
+ .matContainer{
+   width: 100% !important;
+ }
+
+}

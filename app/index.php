@@ -37,4 +37,5 @@ require("controller/" . $default_controller . ".php");
 
 $jumping = new $default_controller();
 
+
 ?>

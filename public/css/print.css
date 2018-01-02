@@ -57,5 +57,9 @@ table th{
 }
 
 .hidden-print{
-  display: none;
+  display: none !important;
+}
+
+#sugerirMateriales{
+  display: none !important;
 }

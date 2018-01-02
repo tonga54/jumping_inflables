@@ -5,8 +5,6 @@
 #print{
   display: none;
 }
-
-
 /* Para cambiar el ancho del nav, y que se ajuste todo correcto, debes cambiar
 la cantidad que necesites en dicho nav, y luego en el sectionContainer ajustar
 el margin left, dependiendo de el ajuste realizado en el nav */
@@ -403,4 +401,80 @@ table th {
     font-family:"SourceSansPro-Bold";
     color:red;
     font-size: 1.17em;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+table{
+  text-align: center;
+}
+.art{
+  width: 45%;
+  display: inline-block;
+  box-sizing: border-box;
+
+}
+
+.stats{
+  text-align: center;
+}
+
+.stats header{
+  text-align:center;
+  width: 47%;
+  display: inline-block;
 }

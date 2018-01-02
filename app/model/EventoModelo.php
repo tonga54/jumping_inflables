@@ -2,7 +2,7 @@
 
 class EventoModelo{
   private $db;
-
+  private $id;
   private $cliente;
   private $telefono;
   private $fecha;
@@ -50,13 +50,17 @@ class EventoModelo{
     }
   }
 
-  private function agregarMateriales(){
-    $id = $this->db->insert_id;
+  private function agregarMateriales($id = null){
+    if($id != null){
+      $this->id = $id;
+    }else{
+      $this->id = $this->db->insert_id;
+    }
     for ($i = 0; $i < Count($this->materiales);$i++){
       if($i == 0){
-        $sql = "INSERT INTO eventomaterial VALUES ($id,".$this->materiales[$i].")";
+        $sql = "INSERT INTO eventomaterial VALUES ($this->id,".$this->materiales[$i].")";
       }else{
-        $sql .= ",($id,".$this->materiales[$i].")";
+        $sql .= ",($this->id,".$this->materiales[$i].")";
       }
     }
     $this->db->query($sql);
@@ -87,7 +91,6 @@ class EventoModelo{
   }
 
   public function cantidadEventosXMes(){
-    //$sql = "SELECT MONTH(fecha) as Fecha,COUNT(*) as CantidadEventos FROM Evento GROUP BY fecha";
     $sql = "SELECT Month(fecha) as Fecha,COUNT(*) as CantidadEventos FROM Evento GROUP BY Month(fecha) ORDER BY CantidadEventos DESC";
     $r = $this->db->query($sql);
     return $r;
@@ -106,13 +109,6 @@ class EventoModelo{
   }
 
   public function buscarEventosXFecha($fecha){
-//     SELECT evento.*, group_concat(material.nombre)
-// FROM evento,eventomaterial,material
-// WHERE evento.id = eventomaterial.idEvento
-// and idMaterial = material.id
-// and evento.fecha = curdate()
-// group by evento.id
-
     $sql = "select e.*, group_concat(m.nombre) as materiales
               from evento e
               left join (
@@ -142,16 +138,53 @@ class EventoModelo{
   }
 
 
-  public function editarEvento($id,$cliente,$telefono,$fecha,$horaInicio,$horaFin,$cantChicos,$direccion,$observaciones,$costo,$duracion){
-    $sql = "UPDATE Evento SET cliente = '".$cliente."',telefono = '".$telefono."',fecha = '".$fecha."',horaInicio = '".$horaInicio."',horaFin = '".$horaFin."',cantChicos = '".$cantChicos."',direccion = '".$direccion."',observaciones = '".$direccion."',costo = '".$costo."',duracion = '".$duracion."'
+  public function editarEvento($id,$cliente,$telefono,$fecha,$horaInicio,$horaFin,$cantChicos,$direccion,$observaciones,$costo,$duracion,$materiales = null){
+    $sql = "UPDATE Evento SET cliente = '".$cliente."',telefono = '".$telefono."',fecha = '".$fecha."',horaInicio = '".$horaInicio."',horaFin = '".$horaFin."',cantChicos = '".$cantChicos."',direccion = '".$direccion."',observaciones = '".$observaciones."',costo = '".$costo."',duracion = '".$duracion."'
     WHERE id = ".$id."";
-    
     $this->db->query($sql);
+
+    if($materiales != null){
+      $this->materiales = $materiales;
+      $sql = "DELETE FROM EventoMaterial WHERE idEvento = '".$id."'";
+      $this->db->query($sql);
+      $this->agregarMateriales($id);
+    }
     if($this->db->affected_rows > 0){
       return true;
     }else{
       return false;
     }
+  }
+
+  public function sugerirMateriales($fecha,$inicio,$fin){
+    $sql = "SELECT nombre FROM Material WHERE id
+            	NOT IN
+            		(SELECT idMaterial FROM EventoMaterial WHERE idEvento
+            				 IN
+            					(SELECT id FROM Evento WHERE fecha = '".$fecha."' AND horaInicio < '".$fin."' AND horaFin > '".$inicio."'))";
+
+    $result = $this->db->query($sql);
+    return $result;
+  }
+
+  public function eliminarEvento($id){
+    $bandera = true;
+    $sql  = "DELETE FROM EventoMaterial WHERE idEvento = '".$id."'";
+    $this->db->query($sql);
+
+    if($this->db->affected_rows <= 0){
+      $bandera = false;
+    }
+
+    $sql  = "DELETE FROM Evento WHERE id = '".$id."'";
+    $this->db->query($sql);
+
+    if($this->db->affected_rows <= 0){
+      $bandera = false;
+    }
+
+    return $bandera;
+
   }
 
 }
