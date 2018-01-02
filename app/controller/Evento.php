@@ -133,7 +133,7 @@ class Evento extends Controller{
   public function eliminarEvento(){
     if(isset($_GET['idEvento'])){
       $id = $_GET['idEvento'];
-      
+
       $result = $this->modelEvento->eliminarEvento($id);
 
       if($result){

@@ -27,7 +27,7 @@
                       <h3>Agregar material</h3>
                   </header>
                   <article>
-                      <form class="" action="index.php?controller=Material&action=altaMaterial" onsubmit="return validateForm()" method="post">
+                      <form class="" action="index.php?controller=Material&action=altaMaterial" method="post">
                         <div id="form">
                             <label for="txtMaterial">Material</label>
                             <input type="text" name="txtMaterial" id="txtMaterial">
@@ -60,21 +60,6 @@
             </footer>
         </div>
   <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript">
-  function validateForm(){
-
-    var bandera = true;
-    var material = document.getElementById("txtMaterial").value;
-
-    if(material == ""){
-      var mensaje = "ERROR:\n";
-      mensaje += "Material vacio\n";
-      alert(mensaje);
-      bandera = false;
-    }
-    return bandera;
-
-  }
-  </script>
+  <script type="text/javascript" src="../public/js/validaciones.js"></script>
   </body>
 </html>

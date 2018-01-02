@@ -51,7 +51,7 @@ date_default_timezone_set('America/Montevideo');
                   <article>
                     <div id="i">
                       <form class="" action="index.php?controller=Evento&action=buscarEventosXFecha" method="post">
-                        <h4>Buscar eventos</h4>
+                        <h4 class="hidden-print">Buscar eventos</h4>
                         <div id="form" class="hidden-print">
                             <label for="txtFecha">Fecha</label>
                             <?php

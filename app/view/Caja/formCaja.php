@@ -43,8 +43,8 @@
                       <h3 id="print"></h3>
                   </header>
                   <article>
-                      <form class="" action="index.php?controller=Caja&action=altaIncidencia" method="post" onsubmit="return validateForm();">
-                        <div id="form">
+                      <form class="" action="index.php?controller=Caja&action=altaIncidencia" method="post">
+                        <div id="form" onsubmit="return validarFormulario()">
                             <label for="txtNombre">Nombre incidencia</label>
                             <input type="text" name="txtNombre" id="txtNombre">
 
@@ -97,55 +97,6 @@
           </div>
         </section>
         <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript">
-            function imprimir() {
-              var fecha = document.getElementById("txtFecha").value;
-              fecha = validarFecha(fecha);
-              document.getElementById("print").innerHTML = "Eventos del día " + fecha;
-                if (window.print) {
-                    window.print();
-                } else {
-                    alert("La función de impresion no esta soportada por su navegador.");
-                }
-            }
-
-            function validarFecha (fecha){
-                anio = fecha.substr(0,4);
-                dia = fecha.substr(8,11);
-                mes = fecha.substr(5,2);
-                fecha = dia+"/"+mes+"/"+anio;
-                return fecha;
-            }
-
-              function validateForm(){
-                var mensaje = "ERROR:\n";
-                var bandera = true;
-                var fecha = document.getElementById("txtFecha").value;
-                var nombre = document.getElementById("txtNombre").value;
-                var valor = document.getElementById("txtValor").value;
-
-
-                if(nombre == ""){
-                  mensaje += "Nombre de la incidencia vacio\n";
-                  bandera = false;
-                }
-                if(fecha == ""){
-                  mensaje += "Fecha vacia\n";
-                  bandera = false;
-                }
-                if(valor == ""){
-                  mensaje += "Importe vacio\n";
-                  bandera = false;
-                }
-
-                if(!bandera){
-                  alert (mensaje);
-                }
-
-                return bandera;
-
-              }
-
-        </script>
+        <script type="text/javascript" src="../public/js/validaciones.js"></script>
   </body>
 </html>
