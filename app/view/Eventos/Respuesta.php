@@ -20,7 +20,7 @@ date_default_timezone_set('America/Montevideo');
          </header>
          <nav>
             <ul>
-         	     <?php include("././core/tempMenu.php"); ?>
+         	     <?php include("././core/tempMenu.inc"); ?>
             </ul>
          </nav>
          <section>
@@ -38,12 +38,9 @@ date_default_timezone_set('America/Montevideo');
 
                </article>
                <footer>
-
+                 <?php include("./core/version.inc"); ?>
                </footer>
             </div>
-            <footer>
-
-            </footer>
         </div>
   </body>
 </html>

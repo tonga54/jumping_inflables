@@ -1,7 +1,3 @@
-<?php
-  date_default_timezone_set('America/Montevideo');
-  $fila = $data->fetch_assoc();
- ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -68,12 +64,11 @@
           </header>
           <nav>
              <ul>
-               <?php include("././core/tempMenu.php"); ?>
+               <?php include("././core/tempMenu.inc"); ?>
              </ul>
           </nav>
           <section>
-          <div class="sectionContainer">
-
+      <div class="sectionContainer">
         <div id="section">
             <header>
                 <h3>Editar evento</h3>
@@ -82,38 +77,38 @@
                 <form class="" action="index.php?controller=Evento&action=editarEventoProceso" method="post">
                   <div id="form">
                       <label for="txtId">Id</label>
-                      <input type="text" name="txtId" style='disabled' id="txtId" readonly="true" value="<?php echo $fila['id']; ?>">
+                      <input type="text" name="txtId" style='disabled' id="txtId" readonly="true" value="<?php echo $data['id']; ?>">
 
                       <label for="txtCliente">Cliente</label>
-                      <input type="text" name="txtCliente" id="txtCliente" value="<?php echo $fila['cliente']; ?>">
+                      <input type="text" name="txtCliente" id="txtCliente" value="<?php echo $data['cliente']; ?>">
 
                       <label for="txtTelefono">Telefono</label>
-                      <input type="tel" name="txtTelefono" id="txtTelefono" value="<?php echo $fila['telefono']; ?>">
+                      <input type="tel" name="txtTelefono" id="txtTelefono" value="<?php echo $data['telefono']; ?>">
 
                       <label for="txtFecha">Fecha</label>
-                      <input type="date" name="txtFecha" id="txtFecha" min="<?php $mesMenos1 = date("m") - 1; echo date("Y"). "-" . $mesMenos1 . "-" . date("d"); ?>" value="<?php echo $fila['fecha']; ?>">
+                      <input type="date" name="txtFecha" id="txtFecha" min="<?php $mesMenos1 = date("m") - 1; echo date("Y"). "-" . $mesMenos1 . "-" . date("d"); ?>" value="<?php echo $data['fecha']; ?>">
 
                       <label for="txtHoraInicio">Hora inicio</label>
-                      <input type="time" name="txtHoraInicio" id="txtHoraInicio" value="<?php echo $fila['horaInicio']; ?>">
+                      <input type="time" name="txtHoraInicio" id="txtHoraInicio" value="<?php echo $data['horaInicio']; ?>">
 
                       <label for="txtHoraFin">Hora fin</label>
-                      <input type="time" name="txtHoraFin" id="txtHoraFin" value="<?php echo $fila['horaFin']; ?>">
+                      <input type="time" name="txtHoraFin" id="txtHoraFin" value="<?php echo $data['horaFin']; ?>">
 
                       <label for="txtCantChicos">Cant chicos</label>
-                      <input type="number" name="txtCantChicos" id="txtCantChicos" value="<?php echo $fila['cantChicos']; ?>">
+                      <input type="number" name="txtCantChicos" id="txtCantChicos" value="<?php echo $data['cantChicos']; ?>">
 
                       <label for="txtDireccion">Direccion</label>
-                      <input type="text" name="txtDireccion" id="txtDireccion" value="<?php echo $fila['direccion']; ?>">
+                      <input type="text" name="txtDireccion" id="txtDireccion" value="<?php echo $data['direccion']; ?>">
 
                       <label for="txtObservaciones">Observaciones</label>
                       <!-- <input type="text" name="txtObservaciones" id="txtObservaciones"> -->
-                      <textarea name="txtObservaciones" id="txtObservaciones" rows="3"><?php echo $fila['observaciones']; ?></textarea>
+                      <textarea name="txtObservaciones" id="txtObservaciones" rows="3"><?php echo $data['observaciones']; ?></textarea>
 
                       <label for="txtCosto">Costo</label>
-                      <input type="number" name="txtCosto" id="txtCosto" value="<?php echo $fila['costo']; ?>">
+                      <input type="number" name="txtCosto" id="txtCosto" value="<?php echo $data['costo']; ?>">
 
                       <label for="txtDuracion">Duracion</label>
-                      <input type="number" name="txtDuracion" id="txtDuracion" value="<?php echo $fila['duracion']; ?>">
+                      <input type="number" name="txtDuracion" id="txtDuracion" value="<?php echo $data['duracion']; ?>">
 
                       <label for="tblMateriales">Materiales actuales</label>
                       <table id="tblMateriales">
@@ -124,7 +119,7 @@
                         </thead>
                         <tbody>
                       <?php
-                          $materiales = explode(",", $fila['materiales']);
+                          $materiales = explode(",", $data['materiales']);
 
                           $mat = "";
                           for($i = 0; $i < Count($materiales);$i++){
@@ -138,13 +133,11 @@
                      </table>
 
 
-                      <label for="choices-multiple-remove-button">Editar materiales</label>
+                      <label for="choices-multiple-remove-button">Editar materiales (Opcional)</label>
                       <select class="form-control" name="slcMateriales[]" id="choices-multiple-remove-button" placeholder="Click aqui para ver los materiales"
                         multiple>
                         <?php
-                            while($fila = $data1->fetch_assoc()){
-                              echo "<option value='" . $fila['id'] . "'>" . $fila['nombre'] . "</option>";
-                            }
+                            echo $data1;
                          ?>
                       </select>
 
@@ -153,6 +146,9 @@
                 </form>
 
               </article>
+                <footer>
+                  <?php include("./core/version.inc"); ?>
+                </footer>
             </div>
           </div>
         </div>
@@ -161,6 +157,23 @@
         <script src="../public/js/choices.min.js?version=2.8.8"></script>
         <script type="text/javascript" src="../public/js/select.js"></script>
         <script type="text/javascript" src="../public/js/validaciones.js"></script>
+        <script type="text/javascript">
+
+          $("#txtHoraFin").change(calcularHora);
+          $("#txtHoraInicio").change(calcularHora);
+
+          function calcularHora(){
+            var horaInicio = $("#txtHoraInicio").val();
+            var horaFin    = $("#txtHoraFin").val();
+
+            horaInicio = Number(horaInicio.substr(0,2));
+            horaFin    = Number(horaFin.substr(0,2));
+
+            var result = horaFin - horaInicio;
+            $("#txtDuracion").val(result);
+          }
+
+        </script>
 
   </body>
 </html>

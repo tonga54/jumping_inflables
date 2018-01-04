@@ -1,7 +1,4 @@
-<?php
-date_default_timezone_set('America/Montevideo');
- ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
  <html>
    <head>
      <meta charset="utf-8">
@@ -38,7 +35,7 @@ date_default_timezone_set('America/Montevideo');
          </header>
          <nav>
             <ul>
-         	     <?php include("././core/tempMenu.php"); ?>
+         	     <?php include("././core/tempMenu.inc"); ?>
             </ul>
          </nav>
          <section>
@@ -93,7 +90,7 @@ date_default_timezone_set('America/Montevideo');
 
                     </div>
 
-                      <div class="r">
+                      <div class="r hidden-print">
 
                       </div>
 
@@ -108,9 +105,9 @@ date_default_timezone_set('America/Montevideo');
                                       <tr>
                                         <th>Cliente</th>
                                         <th>Telefono</th>
-                                        <th>Inicio</th>
+                                        <th>Ini</th>
                                         <th>Fin</th>
-                                        <th>Chicos</th>
+                                        <th>Niños</th>
                                         <th>Direccion</th>
                                         <th>Observaciones</th>
                                         <th>Costo</th>
@@ -162,15 +159,15 @@ date_default_timezone_set('America/Montevideo');
 
                   </article>
 
+                  <footer>
+                    <?php include("./core/version.inc"); ?>
+                  </footer>
+
                 </div>
                             <!--
                   <div class="tooltip">Hover over me
                     <span class="tooltiptext">Tooltip text</span>
                   </div> -->
-
-          <footer>
-
-          </footer>
       </div>
     <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
@@ -182,7 +179,7 @@ date_default_timezone_set('America/Montevideo');
        });
 
        $("#btnEnviar").click(function(){
-           var fecha = $("#txtFecha").val();
+           var fecha  = $("#txtFecha").val();
            var inicio = $("#txtHoraInicio").val();
            var fin    = $("#txtHoraFin").val();
            $.ajax({url: "index.php?controller=Evento&action=sugerirMateriales&fecha=" + fecha + "&inicio=" + inicio + "&fin=" + fin, success: function(result){
@@ -193,9 +190,9 @@ date_default_timezone_set('America/Montevideo');
        });
 
        function imprimir() {
-         var fecha = document.getElementById("txtFecha").value;
+         var fecha = $("#txtFecha").val();
          fecha = validarFecha(fecha);
-         document.getElementById("print").innerHTML = "Eventos del día " + fecha;
+         $("#print").html("Eventos del día " + fecha);
            if (window.print) {
                window.print();
            } else {
@@ -203,8 +200,6 @@ date_default_timezone_set('America/Montevideo');
            }
        }
 
-
-       //Validar la fecha de el form.
        function validarFecha (fecha){
            anio = fecha.substr(0,4);
            dia = fecha.substr(8,11);

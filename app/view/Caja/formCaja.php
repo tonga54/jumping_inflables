@@ -1,7 +1,4 @@
-<?php
-  date_default_timezone_set('America/Montevideo');
- ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
  <html>
    <head>
      <meta charset="utf-8">
@@ -31,7 +28,7 @@
          </header>
          <nav>
             <ul>
-         	     <?php include("././core/tempMenu.php"); ?>
+         	     <?php include("././core/tempMenu.inc"); ?>
             </ul>
          </nav>
          <section>
@@ -89,11 +86,10 @@
                           ?>
                   </article>
 
+                    <footer>
+                      <?php include("./core/version.inc"); ?>
+                    </footer>
                 </div>
-
-                <footer>
-
-                </footer>
           </div>
         </section>
         <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>

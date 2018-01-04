@@ -134,7 +134,12 @@ class EventoModelo{
                 on m.idEvento = e.id WHERE e.id = '$id'
              group by e.id ORDER BY (horaInicio)";
     $result = $this->db->query($sql);
-    return $result;
+    if($result->num_rows == 1){
+      return $result;
+    }else{
+      return null;
+    }
+
   }
 
 

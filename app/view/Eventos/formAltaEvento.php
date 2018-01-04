@@ -22,7 +22,7 @@
         </header>
         <nav>
            <ul>
-             <?php include("././core/tempMenu.php"); ?>
+             <?php include("././core/tempMenu.inc"); ?>
            </ul>
         </nav>
         <section>
@@ -92,16 +92,35 @@
                   </form>
 
               </article>
+              <footer>
+                <?php include("./core/version.inc"); ?>
+              </footer>
+              
             </div>
-
-          <footer>
-
-          </footer>
       </div>
       <script src="https://cdn.polyfill.io/v2/polyfill.js?features=es5,fetch,Element.prototype.classList,requestAnimationFrame,Node.insertBefore,Node.firstChild,Object.assign"></script>
       <script src="../public/js/choices.min.js?version=2.8.8"></script>
       <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="../public/js/select.js"></script>
       <script type="text/javascript" src="../public/js/validaciones.js"></script>
+
+      <script type="text/javascript">
+        calcularHora();
+
+        $("#txtHoraFin").change(calcularHora);
+        $("#txtHoraInicio").change(calcularHora);
+
+        function calcularHora(){
+          var horaInicio = $("#txtHoraInicio").val();
+          var horaFin    = $("#txtHoraFin").val();
+
+          horaInicio = Number(horaInicio.substr(0,2));
+          horaFin    = Number(horaFin.substr(0,2));
+
+          var result = horaFin - horaInicio;
+          $("#txtDuracion").val(result);
+        }
+
+      </script>
   </body>
 </html>

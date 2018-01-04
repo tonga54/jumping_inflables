@@ -66,10 +66,25 @@ class Evento extends Controller{
   }
 
   public function editarEvento(){
-    $id = $_GET['idEvento'];
-    $result = $this->modelEvento->getById($id);
-    $materiales = $this->modelEvento->cargarMateriales();
-    new Views("Eventos/editarEvento",$result,$materiales);
+    if(isset($_GET['idEvento']) && $_GET['idEvento'] != ""){
+        $id = $_GET['idEvento'];
+        $evento = $this->modelEvento->getById($id);
+        if($evento != null){
+          $materiales = $this->modelEvento->cargarMateriales();
+          $aux = "";
+          while($fila = $materiales->fetch_assoc()){
+            $aux .= "<option value='" . $fila['id'] . "'>" . $fila['nombre'] . "</option>";
+          }
+          $materiales = $aux;
+          $evento = $evento->fetch_assoc();
+          new Views("Eventos/editarEvento",$evento,$materiales);
+        }else{
+          new Views("Eventos/Respuesta","No existe el evento");
+        }
+    }else{
+      new Views("Eventos/Respuesta","No existe el evento");
+    }
+
   }
 
   public function editarEventoProceso(){

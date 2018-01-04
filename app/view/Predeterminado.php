@@ -17,7 +17,7 @@
          </header>
          <nav>
             <ul>
-         	     <?php include("././core/tempMenu.php"); ?>
+         	     <?php include("././core/tempMenu.inc"); ?>
             </ul>
          </nav>
          <section>
@@ -130,7 +130,7 @@
                   </article>
                 </div>
                 <footer>
-
+                  <?php include("./core/version.inc"); ?>
                 </footer>
             </div>
   <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>

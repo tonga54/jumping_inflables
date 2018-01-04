@@ -17,7 +17,7 @@
          </header>
          <nav>
             <ul>
-         	     <?php include("././core/tempMenu.php"); ?>
+         	     <?php include("././core/tempMenu.inc"); ?>
             </ul>
          </nav>
          <section>
@@ -53,11 +53,10 @@
                        </tbody>
                      </table>
                   </article>
+                  <footer>
+                    <?php include("./core/version.inc"); ?>
+                  </footer>
               </div>
-
-            <footer>
-
-            </footer>
         </div>
   <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="../public/js/validaciones.js"></script>

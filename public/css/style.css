@@ -386,7 +386,9 @@ table th {
 }
 
 #section footer{
-    text-align:center;
+    text-align:right;
+    font-family: "SourceSansPro-Light";
+    padding: 20px 0px 5px 0px;
 }
 
 #section footer img{
