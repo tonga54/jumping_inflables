@@ -67,7 +67,7 @@ class EventoModelo{
   }
 
   public function mostrarEventos(){
-    $sql = "SELECT * FROM Evento";
+    $sql = "SELECT * FROM Evento WHERE estado = true";
     $this->eventos = $this->db->query($sql);
     return $this->eventos;
   }
@@ -85,19 +85,28 @@ class EventoModelo{
                   join material m
                     on m.id = em.idMaterial) m
               on m.idEvento = e.id
+              WHERE estado = true
            group by e.id ORDER BY (fechaRegistro) DESC LIMIT 5";
     $this->eventos = $this->db->query($sql);
     return $this->eventos;
   }
 
   public function cantidadEventosXMes(){
-    $sql = "SELECT Month(fecha) as Fecha,COUNT(*) as CantidadEventos FROM Evento GROUP BY Month(fecha) ORDER BY CantidadEventos DESC";
+    $sql = "SELECT CONCAT(MONTH(fecha), '-' ,YEAR(fecha)) as Fecha, COUNT(*) as CantidadEventos
+            FROM Evento
+            WHERE estado = true
+            GROUP BY MONTH(fecha),YEAR(fecha)
+            ORDER BY CantidadEventos DESC;";
     $r = $this->db->query($sql);
     return $r;
   }
 
   public function cantidadDineroXMes(){
-    $sql = "SELECT MONTH(Fecha) as Fecha,SUM(Costo) as Total FROM Evento GROUP BY (MONTH(Fecha)) ORDER BY Total DESC;";
+    $sql = "SELECT CONCAT(MONTH(fecha), '-' ,YEAR(fecha)) as Fecha, SUM(Costo) as Total
+            FROM Evento
+            WHERE estado = true
+            GROUP BY MONTH(Fecha),YEAR(Fecha)
+            ORDER BY Total DESC;";
     $r = $this->db->query($sql);
     return $r;
   }
@@ -116,7 +125,7 @@ class EventoModelo{
                     from eventomaterial em
                     join material m
                       on m.id = em.idMaterial) m
-                on m.idEvento = e.id WHERE fecha = '$fecha'
+                on m.idEvento = e.id WHERE fecha = '$fecha' AND estado = true
              group by e.id ORDER BY (horaInicio)";
 
     $result = $this->db->query($sql);
@@ -131,7 +140,7 @@ class EventoModelo{
                     from eventomaterial em
                     join material m
                       on m.id = em.idMaterial) m
-                on m.idEvento = e.id WHERE e.id = '$id'
+                on m.idEvento = e.id WHERE e.id = '$id' AND estado = true
              group by e.id ORDER BY (horaInicio)";
     $result = $this->db->query($sql);
     if($result->num_rows == 1){
@@ -166,7 +175,7 @@ class EventoModelo{
             	NOT IN
             		(SELECT idMaterial FROM EventoMaterial WHERE idEvento
             				 IN
-            					(SELECT id FROM Evento WHERE fecha = '".$fecha."' AND horaInicio < '".$fin."' AND horaFin > '".$inicio."'))";
+            					(SELECT id FROM Evento WHERE fecha = '".$fecha."' AND horaInicio < '".$fin."' AND horaFin > '".$inicio."' AND estado = true))";
 
     $result = $this->db->query($sql);
     return $result;
@@ -174,14 +183,14 @@ class EventoModelo{
 
   public function eliminarEvento($id){
     $bandera = true;
-    $sql  = "DELETE FROM EventoMaterial WHERE idEvento = '".$id."'";
-    $this->db->query($sql);
+    // $sql  = "DELETE FROM EventoMaterial WHERE idEvento = '".$id."'";
+    // $this->db->query($sql);
 
-    if($this->db->affected_rows <= 0){
-      $bandera = false;
-    }
+    // if($this->db->affected_rows <= 0){
+      // $bandera = false;
+    // }
 
-    $sql  = "DELETE FROM Evento WHERE id = '".$id."'";
+    $sql  = "UPDATE Evento SET estado = false WHERE id = '".$id."'";
     $this->db->query($sql);
 
     if($this->db->affected_rows <= 0){

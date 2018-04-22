@@ -35,7 +35,7 @@ class BackupModelo{
   }
 
   public function enviarBackup($nombreArchivo){
-    $to = "jumpinginflablescontacto@gmail.com";
+    $to = "emailDATA";
     $from = "LocalHost";
     $subject = "Backup JumpingInflables " . date("Y-m-d-H-i-s");
     $separator = md5(time());

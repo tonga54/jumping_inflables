@@ -13,6 +13,52 @@
     <link rel="stylesheet" href="../public/css/choices.min.css?version=3.0.2">
   </head>
   <body>
+    <!-- FONDO OPACO -->
+    <div id="fondoOpaco">
+    </div>
+    <!-- POPUP -->
+    <div id="popup">
+      <span class="icon-cross"></span>
+      <div class="content">
+        <h3 class="popup-header">Revision</h3>
+        <div class="tbl">
+          <table>
+              <thead>
+                  <tr>
+                    <th>Cliente</th>
+                    <th>Telefono</th>
+                    <th>Fecha</th>
+                    <th>Ini</th>
+                    <th>Fin</th>
+                    <th>Niños</th>
+                    <th>Direccion</th>
+                    <th>Observaciones</th>
+                    <th>Costo</th>
+                    <th>Duracion</th>
+                    <th>Materiales</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+        <input type="button" value="Confirmar" id="btnConfirmar">
+      </div>
+    </div>
 
     <div class="container">
         <header id="header">
@@ -33,13 +79,13 @@
                   <h3>Registrar evento</h3>
               </header>
               <article>
-                  <form class="" action="index.php?controller=Evento&action=altaEvento" method="post">
+                  <form class="" id="formAltaEvento" action="index.php?controller=Evento&action=altaEvento" method="post">
                     <div id="form">
                         <label for="txtCliente">Cliente</label>
-                        <input type="text" name="txtCliente" id="txtCliente">
+                        <input type="text" name="txtCliente" id="txtCliente" maxlength="20">
 
                         <label for="txtTelefono">Telefono</label>
-                        <input type="tel" name="txtTelefono" id="txtTelefono" value="09">
+                        <input type="tel" name="txtTelefono" id="txtTelefono" value="09" maxlength="20">
 
                         <label for="txtFecha">Fecha</label>
                         <input type="date" name="txtFecha" id="txtFecha" min="<?php $mesMenos1 = date("m") - 1; echo date("Y"). "-" . $mesMenos1 . "-" . date("d"); ?>" value="<?php echo date("Y"). "-" . date("m") . "-" . date("d"); ?>">
@@ -54,11 +100,11 @@
                         <input type="number" name="txtCantChicos" id="txtCantChicos">
 
                         <label for="txtDireccion">Direccion</label>
-                        <input type="text" name="txtDireccion" id="txtDireccion">
+                        <input type="text" name="txtDireccion" id="txtDireccion" maxlength="64">
 
                         <label for="txtObservaciones">Observaciones</label>
                         <!-- <input type="text" name="txtObservaciones" id="txtObservaciones"> -->
-                        <textarea name="txtObservaciones" id="txtObservaciones" rows="3"></textarea>
+                        <textarea name="txtObservaciones" id="txtObservaciones" rows="3" maxlength="64"></textarea>
 
                         <label for="txtCosto">Costo</label>
                         <input type="number" name="txtCosto" id="txtCosto">
@@ -87,7 +133,8 @@
                            ?>
                         </select>
 
-                        <input type="submit" value="Registrar">
+                        <!-- <input type="submit" value="Registrar"> -->
+                        <input type="button" value="Registrar" id="btnRegistrar">
                     </div>
                   </form>
 
@@ -95,7 +142,7 @@
               <footer>
                 <?php include("./core/version.inc"); ?>
               </footer>
-              
+
             </div>
       </div>
       <script src="https://cdn.polyfill.io/v2/polyfill.js?features=es5,fetch,Element.prototype.classList,requestAnimationFrame,Node.insertBefore,Node.firstChild,Object.assign"></script>
@@ -103,6 +150,7 @@
       <script type="text/javascript" src="../public/js/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="../public/js/select.js"></script>
       <script type="text/javascript" src="../public/js/validaciones.js"></script>
+      <script type="text/javascript" src="../public/js/popUp.js"></script>
 
       <script type="text/javascript">
         calcularHora();
@@ -120,7 +168,7 @@
           var result = horaFin - horaInicio;
           $("#txtDuracion").val(result);
         }
-
       </script>
+
   </body>
 </html>

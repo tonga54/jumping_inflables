@@ -15,8 +15,7 @@ class Backup extends Controller{
   }
 
   public function crearBackup(){
-    // $info = $this->modelBackup->crearBackup();
-    $info = "Backup comentado por el momento";
+    $info = $this->modelBackup->crearBackup();
     $viewEventos = new Views("System/backupInfo",$info);
   }
 

@@ -1,5 +1,3 @@
 <?php
-
-  $default_controller = "Predeterminado";
-
+$default_controller = "Predeterminado";
  ?>

@@ -89,7 +89,7 @@
                       <table>
                         <thead>
                             <tr>
-                              <th>Mes</th>
+                              <th>Fecha</th>
                               <th>Cantidad de eventos</th>
                             </tr>
                         </thead>
@@ -110,7 +110,7 @@
                          <table>
                            <thead>
                                <tr>
-                                 <th>Mes</th>
+                                 <th>Fecha</th>
                                  <th>Total</th>
                                </tr>
                            </thead>
