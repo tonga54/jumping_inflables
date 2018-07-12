@@ -22,14 +22,14 @@ class EventoModelo{
   }
 
   public function altaEvento($cliente,$telefono,$fecha,$horaInicio,$horaFin,$cantChicos,$direccion,$observaciones,$costo,$duracion,$slcMateriales){
-    $this->cliente = $cliente;
+    $this->cliente = ucwords($cliente);
     $this->telefono = $telefono;
     $this->fecha = $fecha;
     $this->horaInicio = $horaInicio;
     $this->horaFin = $horaFin;
     $this->cantChicos = $cantChicos;
-    $this->direccion = $direccion;
-    $this->observaciones = $observaciones;
+    $this->direccion = ucfirst($direccion);
+    $this->observaciones = ucfirst($observaciones);
     $this->costo = $costo;
     $this->duracion = $duracion;
     $this->materiales = $slcMateriales;
@@ -37,9 +37,9 @@ class EventoModelo{
   }
 
   private function agregarEvento(){
-    $sql = "INSERT INTO Evento (id,cliente,telefono,fecha,horaInicio,horaFin,fechaRegistro,cantChicos,direccion,observaciones,costo,duracion)
+    $sql = "INSERT INTO Evento (id,cliente,telefono,fecha,horaInicio,horaFin,fechaRegistro,cantChicos,direccion,observaciones,costo,duracion,estado)
     VALUES (null,'" . $this->cliente . "','" . $this->telefono . "','" . $this->fecha . "','" . $this->horaInicio . "','" . $this->horaFin . "',NOW(),'" . $this->cantChicos . "',
-    '" . $this->direccion . "','" . $this->observaciones . "','" . $this->costo . "','" . $this->duracion . "');";
+    '" . $this->direccion . "','" . $this->observaciones . "','" . $this->costo . "','" . $this->duracion . "',true);";
 
     $this->db->query($sql);
     if($this->db->affected_rows == 1){
@@ -153,7 +153,7 @@ class EventoModelo{
 
 
   public function editarEvento($id,$cliente,$telefono,$fecha,$horaInicio,$horaFin,$cantChicos,$direccion,$observaciones,$costo,$duracion,$materiales = null){
-    $sql = "UPDATE Evento SET cliente = '".$cliente."',telefono = '".$telefono."',fecha = '".$fecha."',horaInicio = '".$horaInicio."',horaFin = '".$horaFin."',cantChicos = '".$cantChicos."',direccion = '".$direccion."',observaciones = '".$observaciones."',costo = '".$costo."',duracion = '".$duracion."'
+    $sql = "UPDATE Evento SET cliente = '".ucwords($cliente)."',telefono = '".$telefono."',fecha = '".$fecha."',horaInicio = '".$horaInicio."',horaFin = '".$horaFin."',cantChicos = '".$cantChicos."',direccion = '".ucfirst($direccion)."',observaciones = '".ucfirst($observaciones)."',costo = '".$costo."',duracion = '".$duracion."'
     WHERE id = ".$id."";
     $this->db->query($sql);
 
@@ -199,6 +199,207 @@ class EventoModelo{
 
     return $bandera;
 
+  }
+
+
+
+//Quiero mostrar
+  //Cantidad pop
+  //Cantidad caramelos
+  //Cantidad palitos
+
+  public function obtenerInformacion($fechaInicial, $fechaFinal){
+    $sql = " SELECT SUM(evento.cantChicos) as CantidadPop
+              FROM evento,eventomaterial,material 
+              WHERE evento.id = eventomaterial.idEvento AND
+              eventomaterial.idMaterial = material.id AND
+              material.nombre = 'Pop' AND
+              evento.fecha >= '$fechaInicial' AND evento.fecha <= '$fechaFinal';";
+
+    $sql .= " SELECT SUM(evento.cantChicos) as CantidadAlgodon
+              FROM evento,eventomaterial,material
+              WHERE evento.id = eventomaterial.idEvento AND
+              eventomaterial.idMaterial = material.id AND
+              material.nombre = 'Algodon de Azucar' AND
+              evento.fecha >= '$fechaInicial' AND evento.fecha <= '$fechaFinal';";
+
+    $sql .= " SELECT SUM(evento.cantChicos) as CantidadChicos
+              FROM evento
+              WHERE evento.fecha >= '$fechaInicial' AND evento.fecha <= '$fechaFinal';
+            ";
+
+    $arr = [
+            "pop" => "",
+            "algodon" => "",
+            "chicos" => ""
+           ];
+
+    if ($result = $this->db->multi_query($sql)) {
+      $i = 0;
+      do {
+          /* store first result set */
+          if ($result = $this->db->store_result()) {
+              while ($row = mysqli_fetch_row($result))   
+              {
+                if($i == 0){
+                  $arr["pop"] = $row[0];
+                }else if($i == 1){
+                  $arr["algodon"] = $row[0];
+                }else{
+                  $arr["chicos"] = $row[0];
+                }
+
+                $i++;
+              }
+              mysqli_free_result($result);
+          }   
+      } while ($this->db->next_result());
+    }
+
+    return $arr;
+  }
+
+  public function getEstadisticas(){
+    /*Cantidad de chicos promedio*/
+    $sql = "SELECT AVG(evento.cantChicos)
+    FROM evento;";
+
+    /*Cantidad de veces que se solicitan las camas*/
+    $sql .= "SELECT COUNT(eventomaterial.idMaterial) as cantCama
+    FROM material,eventomaterial,evento
+    WHERE material.id = eventomaterial.idMaterial AND
+    evento.id = eventomaterial.idEvento AND
+    evento.estado = true AND
+    material.nombre LIKE '%Cama%';";
+
+    /*Cantidad de veces que se solicitan los castillos*/
+    $sql .= "SELECT COUNT(eventomaterial.idMaterial) as cantCastillo
+    FROM material,eventomaterial,evento
+    WHERE material.id = eventomaterial.idMaterial AND
+    evento.id = eventomaterial.idEvento AND
+    evento.estado = true AND
+    material.nombre LIKE '%Castillo%';";
+
+    /*Cantidad de veces que se solicitan los tejos*/
+    $sql .= "SELECT COUNT(eventomaterial.idMaterial) as cantTejo
+    FROM material,eventomaterial,evento
+    WHERE material.id = eventomaterial.idMaterial AND
+    evento.id = eventomaterial.idEvento AND
+    evento.estado = true AND
+    material.nombre LIKE '%Tejo%';";
+
+    /*Cantidad de veces que se solicitan los futbolitos*/
+    $sql .= "SELECT COUNT(eventomaterial.idMaterial) as cantFutbolito
+    FROM material,eventomaterial,evento
+    WHERE material.id = eventomaterial.idMaterial AND
+    evento.id = eventomaterial.idEvento AND
+    evento.estado = true AND
+    material.nombre LIKE '%Futbolito%';";
+
+    /*Cantidad de veces que se solicitan el algodon, el pop y la musica*/
+    $sql .= "SELECT material.nombre, COUNT(eventomaterial.idMaterial) as cant
+    FROM material,eventomaterial,evento
+    WHERE material.id = eventomaterial.idMaterial AND
+    evento.id = eventomaterial.idEvento AND
+    evento.estado = true AND
+    (material.nombre = 'POP' OR material.nombre = 'Algodon de azucar' OR material.nombre = 'Musica')
+    GROUP BY (material.nombre);";
+
+    /*Cantidad de eventos en cada hora*/
+    $sql .= "SELECT evento.horaInicio,COUNT(evento.horaInicio)
+    FROM evento 
+    WHERE evento.estado = true
+    GROUP BY(evento.horaInicio)
+    ORDER BY (COUNT(evento.horaInicio)) DESC;";
+
+    /*Que dias se trabaja mas*/
+    $sql .= "SELECT (ELT(WEEKDAY(fecha) + 1, 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo')) AS DIA_SEMANA, COUNT((ELT(WEEKDAY(fecha) + 1, 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'))) as cantidadEventos
+    FROM evento
+    WHERE evento.estado = true
+    GROUP BY (DIA_SEMANA)
+    ORDER BY (cantidadEventos) DESC;";
+
+    /*Que precio es el que se elije mas*/
+    $sql .= "SELECT costo, COUNT(costo) as cantidad
+    FROM evento
+    WHERE estado = true
+    GROUP BY (costo)
+    HAVING COUNT(*) > 4
+    ORDER BY (cantidad) DESC;";
+
+    /*Que duracion la que se elije mas*/
+    $sql .= "SELECT duracion, COUNT(duracion) as cantidad
+    FROM evento
+    WHERE estado = true
+    GROUP BY (duracion)
+    ORDER BY (cantidad) DESC;";
+    
+
+    $arr = [
+            "promChicos" => "",
+            "cantCama" => "",
+            "cantCastillo" => "",
+            "cantTejo" => "",
+            "cantFutbolito" => "",
+            "totalMat" => 0,
+            "extras" => array(),
+            "dias" => array(),
+            "precios" => array(),
+            "duracion" => array()
+           ];
+
+    if ($result = $this->db->multi_query($sql)) {
+      $i = 0;
+      do {
+          /* store first result set */
+          if ($result = $this->db->store_result()) {
+              while ($row = mysqli_fetch_row($result))   
+              {
+                if($i == 0){
+                  $arr["promChicos"] = $row[0];
+                }else if($i == 1){
+                  $arr["cantCama"] = $row[0];
+                  $arr["totalMat"] += $row[0];
+                }else if ($i == 2){
+                  $arr["cantCastillo"] = $row[0];
+                  $arr["totalMat"] += $row[0];
+                }
+                else if($i == 3){
+                  $arr["cantTejo"] = $row[0];
+                  $arr["totalMat"] += $row[0];
+                }
+                else if($i == 4){
+                  $arr["cantFutbolito"] = $row[0];
+                  $arr["totalMat"] += $row[0];
+                }
+                else if($i == 5){
+                  if($row[0] == "Musica"){
+                    $arr["totalMat"] += $row[1];
+                  }
+                  $arr["extras"][$row[0]] = $row[1];
+                }
+                else if($i == 6){
+                  $arr["horas"][$row[0]] = $row[1];
+                }
+                else if($i == 7){
+                  $arr["dias"][$row[0]] = $row[1];
+                }
+                else if($i == 8){
+                  $arr["precios"][$row[0]] = $row[1];
+                }
+                else if($i == 9){
+                  $arr["duracion"][$row[0]] = $row[1];
+                }
+
+
+              }
+              mysqli_free_result($result);
+              $i++;
+          }   
+      } while ($this->db->next_result());
+    }
+
+    return $arr;
   }
 
 }

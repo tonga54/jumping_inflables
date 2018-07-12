@@ -163,6 +163,26 @@ class Evento extends Controller{
 
   }
 
+  public function getInformacion(){
+    $hoy = getdate();
+    if($hoy['weekday'] == "Saturday"){
+      $fechaInicial=date("Y-m-d",strtotime("-7 day", strtotime("next saturday")));
+      $fechaFinal=date("Y-m-d",strtotime("-7 day", strtotime("next sunday")));
+    }
+    else{
+      $fechaInicial=date("Y-m-d",strtotime("next saturday"));
+      $fechaFinal=date("Y-m-d",strtotime("next sunday"));
+    }
+
+    $informacion = $this->modelEvento->obtenerInformacion($fechaInicial,$fechaFinal);
+    new Views("Eventos/getInformacion",$informacion);
+  }
+
+  public function getEstadisticas(){
+    $estadisticas = $this->modelEvento->getEstadisticas();
+    new Views("Eventos/getEstadisticas",$estadisticas);
+  }
+
 
 }
 
